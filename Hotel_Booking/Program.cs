@@ -9,24 +9,25 @@ using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+/* --- Add services to the container --- */
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
-// Add connection to SQL SERVER.
+/* --- Add connection to SQL SERVER --- */
 builder.Services.AddSingleton<IDbConnection>((sp) => new SqlConnection(builder.Configuration.GetConnectionString("CONNECTION_SQL")));
 builder.Services.AddSingleton<DapperContext>();
 
-// Añade el registro de HttpClient
+/* --- Register HttpClient --- */
 builder.Services.AddHttpClient();
 
+/* --- Register controllers --- */
 builder.Services.AddControllers();
 
-// Registra tus servicios
+/* --- Register services --- */
 builder.Services.AddScoped<ICustomerService, ImplCustomerService>();
 
-// Registrar repositorios
+/* --- Register repositories --- */
 builder.Services.AddScoped<ICustomerRepository, ImplCustomerRepository>();
 
 var app = builder.Build();
@@ -43,11 +44,15 @@ else
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+/* --- Register routing --- */
 app.UseRouting();
+
+/* --- Register the mapping of controllers --- */
+app.MapControllers();
+
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
-app.MapControllers();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()

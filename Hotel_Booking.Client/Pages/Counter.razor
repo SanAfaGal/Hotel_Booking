@@ -1,0 +1,118 @@
+﻿@page "/counter"
+@rendermode InteractiveAuto
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-danger" @onclick="IncrementCount">Click me</button>
+
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+    /*
+     * 
+     * <button class="btn btn-primary" @onclick="addUser">Add customer</button>
+<button class="btn btn-secondary" @onclick="getUser">Get customer</button>
+<button class="btn btn-primary" @onclick="deleteUser">Delete customer</button>
+<button class="btn btn-warning" @onclick="updateUser">Update customer</button>
+<button class="btn btn-warning" @onclick="getUsers">Get customers</button>
+
+    private async void addUser()
+        {
+        ImplCustomerRepository customerRepository = new ImplCustomerRepository();
+
+        Customer customer = new Customer
+                {
+                Dni_Customer = "1005",
+                First_Name = "John",
+                Last_Name = "Doe",
+                Email = "john.doe@example.com",
+                Phone = "1234567890"
+        };
+
+        bool insertionResult = await customerRepository.InsertCustomer(customer);
+        Console.WriteLine($"Customer insertion result: {insertionResult}");
+    }
+
+    private async void getUser()
+        {
+        ImplCustomerRepository customerRepository = new ImplCustomerRepository();
+
+        string dni = "1005";
+        Customer customer = await customerRepository.GetCustomerByDni(dni);
+
+        if (customer != null)
+            {
+            Console.WriteLine($"Customer: Full Name: {customer.First_Name} {customer.Last_Name}, Email: {customer.Email}, Phone: {customer.Phone}");
+        }
+        else
+            {
+            Console.WriteLine("Customer not found.");
+    }
+    }
+
+    private async void deleteUser()
+        {
+        ImplCustomerRepository customerRepository = new ImplCustomerRepository();
+
+        string dniToDelete = "1005";
+        bool deletionResult = await customerRepository.DeleteCustomerByDni(dniToDelete);
+
+        if (deletionResult)
+            {
+            Console.WriteLine("Customer deleted successfully.");
+        }
+        else
+            {
+            Console.WriteLine("Failed to delete customer.");
+    }
+    }
+
+    private async void updateUser()
+        {
+        ImplCustomerRepository customerRepository = new ImplCustomerRepository();
+
+        Customer updatedCustomer = new Customer
+                {
+                First_Name = "NuevoNombre",
+                Last_Name = "NuevoApellido",
+                Email = "nuevo@email.com",
+                Phone = "1234567890"
+        };
+
+        string dniToUpdate = "1005";
+        bool updateResult = await customerRepository.UpdateCustomerByDni(dniToUpdate, updatedCustomer);
+
+        if (updateResult)
+            {
+            Console.WriteLine("Customer updated successfully.");
+        }
+        else
+            {
+            Console.WriteLine("Failed to update customer.");
+    }
+    }
+
+    private async void getUsers()
+        {
+        ImplCustomerRepository customerRepository = new ImplCustomerRepository();
+
+        IEnumerable<Customer> allCustomers = await customerRepository.GetAllCustomers();
+
+        foreach (var customer in allCustomers)
+            {
+            Console.WriteLine($"Customer: Email: {customer.Email}, Phone: {customer.Phone}");
+    }
+        }
+    */
+    
+}

@@ -21,14 +21,12 @@ builder.Services.AddSingleton<DapperContext>();
 /* --- Register HttpClient --- */
 builder.Services.AddHttpClient();
 
-/* --- Register controllers --- */
+/* --- Add services to the container  --- */
 builder.Services.AddControllers();
 
-/* --- Register services --- */
-builder.Services.AddScoped<ICustomerService, ImplCustomerService>();
-
-/* --- Register repositories --- */
+/* --- Register the repository and the service  --- */
 builder.Services.AddScoped<ICustomerRepository, ImplCustomerRepository>();
+builder.Services.AddScoped<ICustomerService, ImplCustomerService>(); ;
 
 var app = builder.Build();
 

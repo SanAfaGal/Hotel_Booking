@@ -1,4 +1,5 @@
-﻿using Hotel_Booking.Shared;
+﻿using Hotel_Booking.Services;
+using Hotel_Booking.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
 
@@ -8,25 +9,83 @@ namespace Hotel_Booking.Controllers
     [ApiController]
     public class CustomerController : Controller
     {
-        private readonly ICustomerRepository _ICustomerRepository;
+        private readonly ICustomerService _customerService;
 
-        public CustomerController(ICustomerRepository CustomerParam)
+        public CustomerController(ICustomerService customerService)
         {
-            _ICustomerRepository = CustomerParam;
+            _customerService = customerService;
         }
 
-   
-        [HttpPost("SaveCustomer")]
-        public async Task<IActionResult> SaveCustomer([FromBody] Customer customer)
+        // Create: POST api/customer
+        [HttpPost()]
+        public async Task<IActionResult> InsertCustomer([FromBody] Customer customer)
         {
-            if (customer == null)
+            if (customer == null) return BadRequest();
+            bool result = await _customerService.InsertCustomer(customer);
+            if (result)
             {
-                return BadRequest();
+                return Ok();
             }
+            else
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
 
-            await _ICustomerRepository.InsertCustomer(customer);
+        // Read: GET api/customer/{dni}
+        [HttpGet("{dni}")]
+        public async Task<IActionResult> GetCustomerByDni(string dni)
+        {
+            if (string.IsNullOrEmpty(dni)) return BadRequest();
+            Customer customer = await _customerService.GetCustomerByDni(dni);
+            if (customer != null)
+            {
+                return Ok(customer);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
 
-            return Ok();
+        // Read All: GET api/customer
+        [HttpGet()]
+        public async Task<IActionResult> GetAllCustomers()
+        {
+            IEnumerable<Customer> customers = await _customerService.GetAllCustomers();
+            return Ok(customers);
+        }
+
+        // Update: PUT api/customer/{dni}
+        [HttpPut("{dni}")]
+        public async Task<IActionResult> UpdateCustomer(string dni, [FromBody] Customer updatedCustomer)
+        {
+            if (string.IsNullOrEmpty(dni) || updatedCustomer == null) return BadRequest();
+            bool result = await _customerService.UpdateCustomerByDni(dni, updatedCustomer);
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        // Delete: DELETE api/customer/{dni}
+        [HttpDelete("{dni}")]
+        public async Task<IActionResult> DeleteCustomer(string dni)
+        {
+            if (string.IsNullOrEmpty(dni)) return BadRequest();
+            bool result = await _customerService.DeleteCustomerByDni(dni);
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

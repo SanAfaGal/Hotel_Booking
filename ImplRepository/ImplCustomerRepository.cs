@@ -57,9 +57,9 @@ namespace ImplRepository
             try
             {
                 string sql = @"SELECT dni_customer, first_name, last_name, email, phone FROM tbl_customers WHERE dni_customer = @DniCustomer";
-
+                
                 var customer = await _dbConnection.QueryFirstOrDefaultAsync<Customer>(sql, new { dniCustomer });
-
+                
                 return customer;
             }
             catch (Exception ex)
@@ -77,7 +77,6 @@ namespace ImplRepository
         {
             try
             {
-
                 string sql = @"SELECT dni_customer, first_name, last_name, email, phone FROM tbl_customers";
 
                 var customers = await _dbConnection.QueryAsync<Customer>(sql);
@@ -129,11 +128,11 @@ namespace ImplRepository
 
                 var result = await _dbConnection.ExecuteAsync(sql, new
                 {
-                    updatedCustomer.First_Name,
-                    updatedCustomer.Last_Name,
-                    updatedCustomer.Email,
-                    updatedCustomer.Phone,
-                    dniCustomer
+                    FirstName = updatedCustomer.First_Name,
+                    LastName = updatedCustomer.Last_Name,
+                    Email = updatedCustomer.Email,
+                    Phone = updatedCustomer.Phone,
+                    DniCustomer = dniCustomer
                 });
 
                 return result > 0;

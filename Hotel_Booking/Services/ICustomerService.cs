@@ -4,10 +4,10 @@ namespace Hotel_Booking.Services
 {
     public interface ICustomerService
     {
-        Task InsertCustomer(Customer customer);
-        Task GetCustomerByDni(string dniCustomer);
-        Task GetAllCustomers();
-        Task UpdateCustomerByDni(string dniCustomer, Customer updatedCustomer);
-        Task DeleteCustomerByDni(string dniCustomer);
+        Task<bool> InsertCustomer(Customer customer);
+        Task<Customer> GetCustomerByDni(string dniCustomer);
+        Task<IEnumerable<Customer>> GetAllCustomers();
+        Task<bool> UpdateCustomerByDni(string dniCustomer, Customer updatedCustomer);
+        Task<bool> DeleteCustomerByDni(string dniCustomer);
     }
 }

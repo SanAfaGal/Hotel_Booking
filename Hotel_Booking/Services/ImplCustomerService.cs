@@ -1,38 +1,40 @@
 ﻿using Hotel_Booking.Shared;
+using Repository;
 
 namespace Hotel_Booking.Services
 {
     public class ImplCustomerService : ICustomerService
     {
-        private readonly HttpClient _httpClient;
-        public ImplCustomerService(HttpClient httpClient)
+        private readonly ICustomerRepository _customerRepository;
+
+        public ImplCustomerService(ICustomerRepository customerRepository)
         {
-            _httpClient = httpClient;
-        }
-        Task ICustomerService.DeleteCustomerByDni(string dniCustomer)
-        {
-            throw new NotImplementedException();
+            _customerRepository = customerRepository;
         }
 
-        Task ICustomerService.GetAllCustomers()
+        public async Task<bool> InsertCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            return await _customerRepository.InsertCustomer(customer);
         }
 
-        Task ICustomerService.GetCustomerByDni(string dniCustomer)
+        public async Task<Customer> GetCustomerByDni(string dniCustomer)
         {
-            throw new NotImplementedException();
+            return await _customerRepository.GetCustomerByDni(dniCustomer);
         }
 
-
-        async Task ICustomerService.InsertCustomer(Customer customer)
+        public async Task<IEnumerable<Customer>> GetAllCustomers()
         {
-            var data = await _httpClient.PostAsJsonAsync<Customer>($"api/Customer/SaveCustomer", customer);
+            return await _customerRepository.GetAllCustomers();
         }
 
-        Task ICustomerService.UpdateCustomerByDni(string dniCustomer, Customer updatedCustomer)
+        public async Task<bool> UpdateCustomerByDni(string dniCustomer, Customer updatedCustomer)
         {
-            throw new NotImplementedException();
+            return await _customerRepository.UpdateCustomerByDni(dniCustomer, updatedCustomer);
+        }
+
+        public async Task<bool> DeleteCustomerByDni(string dniCustomer)
+        {
+            return await _customerRepository.DeleteCustomerByDni(dniCustomer);
         }
     }
 }

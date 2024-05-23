@@ -1,8 +1,8 @@
 ﻿using Hotel_Booking.Shared;
-    
-namespace Repository
+
+namespace Hotel_Booking.Services
 {
-    public interface IRoomRepository
+    public interface IRoomService
     {
         Task<IEnumerable<Room>> GetAllRooms();
         Task<IEnumerable<Room>> GetAvailableRooms();

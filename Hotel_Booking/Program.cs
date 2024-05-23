@@ -1,6 +1,7 @@
 using Hotel_Booking.Client.Pages;
 using Hotel_Booking.Components;
 using Hotel_Booking.Context;
+using Hotel_Booking.ImplService;
 using Hotel_Booking.Services;
 using ImplRepository;
 using Microsoft.Data.SqlClient;
@@ -26,7 +27,10 @@ builder.Services.AddControllers();
 
 /* --- Register the repository and the service  --- */
 builder.Services.AddScoped<ICustomerRepository, ImplCustomerRepository>();
-builder.Services.AddScoped<ICustomerService, ImplCustomerService>(); ;
+builder.Services.AddScoped<ICustomerService, ImplCustomerService>();
+
+builder.Services.AddScoped<IRoomRepository, ImplRoomRepository>();
+builder.Services.AddScoped<IRoomService, ImplRoomService>();
 
 var app = builder.Build();
 

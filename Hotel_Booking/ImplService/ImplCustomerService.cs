@@ -1,7 +1,8 @@
-﻿using Hotel_Booking.Shared;
+﻿using Hotel_Booking.Services;
+using Hotel_Booking.Shared;
 using Repository;
 
-namespace Hotel_Booking.Services
+namespace Hotel_Booking.ImplService
 {
     public class ImplCustomerService : ICustomerService
     {

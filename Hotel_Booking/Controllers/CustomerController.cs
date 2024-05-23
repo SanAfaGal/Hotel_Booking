@@ -65,7 +65,7 @@ namespace Hotel_Booking.Controllers
             if (result)
             {
                 return Ok();
-            }
+            }   
             else
             {
                 return NotFound();
